@@ -1,6 +1,5 @@
-// Lokasi: lib/pages/home_page.dart
 import 'package:flutter/material.dart';
-import 'tambah_kliping.dart'; // Mengimpor halaman TambahKlipingPage
+import 'tambah_kliping.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -88,7 +87,6 @@ class _HomePageState extends State<HomePage> {
               );
               return;
             }
-
             setState(() {
               _selectedIndex = index;
             });
