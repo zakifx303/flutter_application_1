@@ -1,7 +1,8 @@
 // Lokasi: lib/pages/home_page.dart
 import 'package:flutter/material.dart';
-import 'tambah_kliping.dart'; // Ganti ke tambah_kliping_page.dart jika nama file Anda berbeda
-import 'analitik_page.dart'; // Mengimpor halaman analitik yang baru dibuat
+import 'tambah_kliping.dart'; // Pastikan nama file ini sesuai dengan buatan Anda
+import 'analitik_page.dart'; // Import halaman analitik
+import 'search_page.dart'; // Import halaman pencarian yang baru kita buat
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,9 +14,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  // Daftar halaman yang akan dipanggil berdasarkan tab
+  // Daftar halaman yang akan dipanggil berdasarkan tab yang diklik
   final List<Widget> _pages = [
-    const HomeContent(), // Index 0: Tampilan "Tidak ada apa-apa"
+    const HomeContent(), // Index 0: Tampilan awal (kosong)
     const TambahKlipingPage(), // Index 1: Form tambah kliping
     const AnalitikPage(), // Index 2: Halaman Analistik
   ];
@@ -24,8 +25,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: _buildDynamicAppBar(),
-      body: _pages[_selectedIndex],
+      appBar: _buildDynamicAppBar(), // AppBar yang bisa berubah-ubah
+      body: _pages[_selectedIndex], // Menampilkan halaman berdasarkan index
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border(
@@ -72,6 +73,7 @@ class _HomePageState extends State<HomePage> {
   // Fungsi untuk mengubah AppBar berdasarkan halaman yang sedang dibuka
   PreferredSizeWidget _buildDynamicAppBar() {
     if (_selectedIndex == 1) {
+      // --- Tampilan AppBar untuk tab Halaman "Tambah Kliping" ---
       return AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -86,11 +88,11 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     } else if (_selectedIndex == 2) {
-      // Tampilan AppBar untuk Halaman "Analistik"
+      // --- Tampilan AppBar untuk tab Halaman "Analistik" ---
       return AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        centerTitle: true, // Judul di tengah sesuai wireframe ke-3
+        centerTitle: true,
         title: const Text(
           'Analistik',
           style: TextStyle(color: Colors.black, fontSize: 20),
@@ -102,7 +104,7 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-    // Tampilan AppBar untuk Halaman "Home" (Index 0)
+    // --- Tampilan AppBar untuk tab Halaman "Home" (Utama) ---
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
@@ -118,7 +120,13 @@ class _HomePageState extends State<HomePage> {
       actions: [
         IconButton(
           icon: const Icon(Icons.search, color: Colors.black, size: 28),
-          onPressed: () {},
+          onPressed: () {
+            // Logika untuk berpindah ke halaman SearchPage saat ikon diklik
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SearchPage()),
+            );
+          },
         ),
       ],
       bottom: PreferredSize(
@@ -129,6 +137,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+// Tampilan "Tidak ada apa-apa" dipisah agar kodenya rapi
 class HomeContent extends StatelessWidget {
   const HomeContent({super.key});
 
