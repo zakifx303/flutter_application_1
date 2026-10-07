@@ -1,8 +1,20 @@
 // Lokasi: lib/pages/tambah_kliping_page.dart
 import 'package:flutter/material.dart';
 
-class TambahKlipingPage extends StatelessWidget {
+class TambahKlipingPage extends StatefulWidget {
   const TambahKlipingPage({super.key});
+
+  @override
+  State<TambahKlipingPage> createState() => _TambahKlipingPageState();
+}
+
+class _TambahKlipingPageState extends State<TambahKlipingPage> {
+  String? _selectedKategori;
+  final List<String> _kategoriList = [
+    'Kategori 1',
+    'Kategori 2',
+    'Kategori 3',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -19,25 +31,45 @@ class TambahKlipingPage extends StatelessWidget {
           _buildTextField('Sumber berita'),
           const SizedBox(height: 16),
 
-          // Dropdown Mockup: Pilih Kategori (Sesuai wireframe dengan kotak hitam di kanan)
+          // Dropdown: Pilih Kategori
           Container(
             height: 50,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(4),
             ),
-            child: Row(
-              children: [
-                const SizedBox(width: 12),
-                const Expanded(
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                value: _selectedKategori,
+                hint: const Padding(
+                  padding: EdgeInsets.only(left: 12.0),
                   child: Text(
                     'Pilih kategori',
                     style: TextStyle(color: Colors.grey, fontSize: 16),
                   ),
                 ),
-                Container(
+                isExpanded: true,
+                selectedItemBuilder: (BuildContext context) {
+                  return _kategoriList.map<Widget>((String item) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 12.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          item,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList();
+                },
+                icon: Container(
                   margin: const EdgeInsets.all(4),
                   width: 40,
+                  height: 40,
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(4),
@@ -50,7 +82,18 @@ class TambahKlipingPage extends StatelessWidget {
                     ),
                   ),
                 ),
-              ],
+                items: _kategoriList.map((String kategori) {
+                  return DropdownMenuItem<String>(
+                    value: kategori,
+                    child: Text(kategori),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedKategori = newValue;
+                  });
+                },
+              ),
             ),
           ),
           const SizedBox(height: 16),
