@@ -1,4 +1,3 @@
-// Lokasi: lib/pages/home_page.dart
 import 'package:flutter/material.dart';
 import 'tambah_kliping.dart'; // Pastikan nama file ini sesuai dengan buatan Anda
 import 'analitik_page.dart'; // Import halaman analitik
