@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'tambah_kliping.dart'; // Pastikan nama file ini sesuai dengan buatan Anda
+import 'tambah_kliping.dart'; // Import halaman tambah kliping
 import 'analitik_page.dart'; // Import halaman analitik
 import 'search_page.dart'; // Import halaman pencarian yang baru kita buat
 
